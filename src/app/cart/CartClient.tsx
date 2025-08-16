@@ -118,6 +118,29 @@ export default function CartPage() {
             <span>Subtotal</span>
             <span className="font-semibold">Rp {subtotal.toLocaleString('id-ID')}</span>
           </div>
+          
+           {/* === AI Upsell === */}
+  <div className="mt-4 space-y-2">
+    <div className="text-sm font-medium">Saran tambahan dari AI</div>
+    <button
+      className="px-4 py-2 rounded-xl border"
+      onClick={async () => {
+        const res = await fetch('/api/ai-upsell', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            lines,
+            budgetExtra: 100000 // ubah sesuai keinginan
+          })
+        });
+        const data = await res.json();
+        alert(data.ok ? data.text : ('Gagal: ' + data.error));
+      }}
+    >
+      Tampilkan Saran
+    </button>
+  </div>
+  {/* === end AI Upsell === */}
+
           <p className="text-xs text-gray-500 mt-1">*MVP tanpa pembayaran online (dummy).</p>
           <button
             className="mt-4 w-full px-5 py-3 rounded-xl bg-black text-white disabled:opacity-50"
