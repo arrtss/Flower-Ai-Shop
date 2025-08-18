@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin as supabase } from '@/lib/supabaseAdmin';
+// import 'server-only';
 
 export async function POST() {
   const { data, error } = await supabase
