@@ -13,8 +13,8 @@ export default function AddToCart({ slug }: Props) {
   };
 
   return (
-    <button className="mt-6 px-5 py-3 rounded-xl bg-black text-white" onClick={onClick}>
-      Tambah ke Keranjang
+    <button className="btn-primary mt-6" onClick={onClick} aria-label="Tambah ke keranjang">
+      + Keranjang
     </button>
   );
 }

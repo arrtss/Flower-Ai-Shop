@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+/* ====== Design Tokens (lebih cerah) ====== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffdfc;
+  --foreground: #181a1c;
+
+  /* Palet cerah */
+  --rose-50:  #fff1f3;
+  --rose-100: #ffe4e8;
+  --rose-500: #e11d48;   /* primary */
+  --peach-50: #fff3e8;
+  --peach-200:#ffd9b8;
+  --lilac-50: #f6f0ff;
+  --mint-50:  #edfff7;
+  --sage-500: #7aa97a;
+
+  --radius-lg: 1rem;
+  --shadow-card: 0 14px 28px rgba(16, 24, 40, 0.08);
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-primary:    var(--rose-500);
+  --color-accent:     var(--sage-500);
+  --color-surface:    #ffffff;
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans:    var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial);
+  --font-display: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --color-surface: #111316;
   }
 }
 
+/* ====== Base ====== */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  /* Background lebih cerah & unik (radial blobs lembut) */
+  background:
+    radial-gradient(900px 420px at -10% -10%, var(--rose-50) 0%, transparent 60%),
+    radial-gradient(700px 360px at 110% 0%, var(--peach-50) 0%, transparent 60%),
+    radial-gradient(680px 360px at 50% 115%, var(--lilac-50) 0%, transparent 60%),
+    var(--background);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+a { color: var(--color-primary); text-decoration: none; }
+
+/* ====== Utilities ====== */
+.card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.surface { background: var(--color-surface); }
+
+/* tombol utama: gradient cerah */
+.btn-primary {
+  background-image: linear-gradient(90deg, #ff6ea7 0%, #ffa94d 100%);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(255, 122, 167, 0.25);
+  transition: filter 120ms ease, box-shadow 120ms ease, transform 80ms ease;
+}
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-primary:active { filter: brightness(0.95); transform: translateY(0.5px); }
+.btn-primary:focus { outline: none; box-shadow: 0 0 0 6px rgba(255, 122, 167, 0.28); }
+
+/* tombol sekunder: kapsul cerah */
+.btn-secondary {
+  background: rgba(255,255,255,0.75);
+  color: var(--color-primary);
+  border: 1px solid #ffd1dc; /* rose-200-ish */
+  border-radius: 999px; /* full pill */
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  backdrop-filter: saturate(140%) blur(4px);
+}
+.btn-secondary:hover {
+  background: var(--rose-50);
+  color: var(--color-primary);
+  border-color: #ffb2c5;
+}
+
+/* kartu cerah dengan ring tipis */
+.card-bright {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #f4e7ec;
+  border-radius: 1rem;
+  box-shadow: 0 10px 24px rgba(255, 105, 180, 0.08);
+}
+
+/* hero candy */
+.hero-candy {
+  background:
+    radial-gradient(500px 320px at 10% 10%, #ffe4e8 0%, transparent 70%),
+    radial-gradient(420px 260px at 90% 20%, #fff1d6 0%, transparent 65%),
+    radial-gradient(460px 260px at 80% 100%, #eefdf5 0%, transparent 65%),
+    #ffffff;
+  border: 1px solid #f5e1e6;
 }
